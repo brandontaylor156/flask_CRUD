@@ -1,0 +1,44 @@
+{% extends "base.html" %} 
+
+{% block title %}Dojos{% endblock %} 
+
+{% block content %}
+
+<div class="container mt-5">
+  
+  <div class="row gap-5">
+    <div class="col p-3">
+      <h2 class="display-2 text-white-50">New Dojo</h2>
+      <form action="/create_dojo" method="post">
+        <div class="form-group ">
+          <label for="dojo_name"  class="text-white-50 lead">Name:</label>
+          <input type="text" class="form-control" id="dojo_name" name="name" aria-describedby="dojo_name" required>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg mt-4">Create</button>
+      </form>
+    </div>
+    <div class="col p-3">
+      <h2 class="display-2 text-white-50">All Dojos</h2>
+      <table class="table table-success text-dark text-center">
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Ninja Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for dojo in dojos: %}
+          <tr>
+            <td><a href="/dojos/{{dojo.id}}">{{dojo.name}}</a></td>
+            <td>{{dojo.ninjas|length}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn btn-success btn-lg mt-2" href="/ninjas">Add Ninja</a>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}
