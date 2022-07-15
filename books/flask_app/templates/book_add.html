@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+
+{% block title %}Books{% endblock %} 
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row gap-5">
+      <div class="col p-3">
+        <h2 class="display-2 text-white-50">New Book</h2>
+        <form action="/books" method="post">
+          <div class="form-group ">
+            <label for="title"  class="text-white-50 lead">Title:</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="title" required>
+          </div>
+          <div class="form-group ">
+            <label for="num_of_pages"  class="text-white-50 lead">Number of Pages:</label>
+            <input type="text" class="form-control" id="num_of_pages" name="num_of_pages" aria-describedby="num_of_pages" required>
+          </div>
+          <button type="submit" class="btn btn-success btn-lg mt-4">Create</button>
+        </form>
+      </div>
+      <div class="col p-3">
+        <h2 class="display-2 text-white-50">All Books</h2>
+        <table class="table table-success text-dark text-center">
+          <tbody>
+            {% for book in books: %}
+            <tr>
+              <td><a href="/books/{{book.id}}">{{book.title}}</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a class="btn btn-success btn-lg mt-2" href="/authors">Add Author</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

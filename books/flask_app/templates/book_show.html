@@ -1,0 +1,65 @@
+{% extends "base.html" %} 
+
+{% block title %}Book Show{% endblock %} 
+
+{% block content %}
+
+<div class="container mt-4 text-white-50 lead">
+
+    <div class="row">
+
+        <div class="col">
+            <h2 class="display-2 text-center">Title: {{book.title}}</h2>
+            <table class="table table-success text-dark w-80">
+                <thead>
+                    <tr>
+                        <th>Favorited By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for author in book.authors: %}
+                    <tr>
+                        {% if author.id != None %}
+                        <td>{{author.first_name}} {{author.last_name}}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/books" class="lead">Books</a>
+        </div>
+
+        <div class="col">
+            <h2 class="display-2 text-center">Add Book's Favorite</h2>
+            <form action="/book/add/favorite" method="post">
+            <div class="form-group py-3">
+                <div class="row">
+
+                    <div class="col-3 d-flex justify-content-end">
+                        <label for="author_id">Author:</label>
+                    </div>
+                    <div class="col-9">
+                        <input type="hidden" name="book_id" value="{{book.id}}">
+                        <select name="author_id" class="form-select">
+                            <option selected hidden disabled>Select Author</option>
+                            {% for author in authors %}
+                                <option value="{{author.id}}">{{author.first_name}} {{author.last_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>      
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col d-flex justify-content-end">
+                        <button type="submit" class="btn btn-success btn-lg my-3">Add</button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+    </div>
+    
+</div>
+
+{% endblock %}

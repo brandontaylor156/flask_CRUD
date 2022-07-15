@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+
+{% block title %}Authors{% endblock %} 
+
+{% block content %}
+
+<div class="container mt-5">
+  
+  <div class="row gap-5">
+    <div class="col p-3">
+      <h2 class="display-2 text-white-50">New Author</h2>
+      <form action="/create_author" method="post">
+        <div class="form-group ">
+          <label for="first_name"  class="text-white-50 lead">First Name:</label>
+          <input type="text" class="form-control" id="first_name" name="first_name" aria-describedby="first_name" required>
+        </div>
+        <div class="form-group ">
+          <label for="last_name"  class="text-white-50 lead">Last Name:</label>
+          <input type="text" class="form-control" id="last_name" name="last_name" aria-describedby="last_name" required>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg mt-4">Create</button>
+      </form>
+    </div>
+    <div class="col p-3">
+      <h2 class="display-2 text-white-50">All Authors</h2>
+      <table class="table table-success text-dark text-center">
+        <tbody>
+          {% for author in authors: %}
+          <tr>
+            <td><a href="/authors/{{author.id}}">{{author.first_name}} {{author.last_name}}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a class="btn btn-success btn-lg mt-2" href="/books">Add Book</a>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}
