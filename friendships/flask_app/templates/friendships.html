@@ -1,0 +1,78 @@
+{% extends "base.html" %} 
+
+{% block title %}Friendships{% endblock %} 
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+      <div class="col">
+        <h2 class="display-2">Friendships</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Friend</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in friendships: %}
+              {% for friend in user.friends %}
+            <tr>
+              <td>{{user.first_name}} {{user.last_name}}</td> 
+              <td>{{friend.first_name}} {{friend.last_name}}</td>
+            </tr>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col">
+
+        <div class="row">
+          <h2 class="display-2">Add User</h2>
+          <form action="/friendships" method="post">
+            <input type="hidden" name="which_form" value="insert_user">
+            <div class="form-group">
+              <label for="first_name">First Name:</label>
+              <input type="text" class="form-control" id="first_name" name="first_name">
+            </div>
+            <div class="form-group ">
+              <label for="last_name">Last Name:</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" aria-describedby="last_name" required>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Add User</button>
+          </form>
+        </div>
+
+        <div class="row">
+          <h2 class="display-2">Create Friendship</h2>
+          <form action="/friendships" method="post">
+            <input type="hidden" name="which_form" value="insert_friendship">
+            <div class="form-group">
+              <select name="user_id" class="form-select">
+                <option selected hidden disabled>Select User</option>
+                {% for user in users %}
+                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="friend_id" class="form-select">
+                <option selected hidden disabled>Select Friend</option>
+                {% for user in users %}
+                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success btn-lg">Create</button>
+          </form>
+        </div>
+
+      </div>
+      
+  </div>
+
+{% endblock %}
