@@ -1,7 +1,5 @@
-from flask_app import app
-from flask import render_template, request, redirect, session
+from flask_app import app, render_template, request, redirect, session
 from flask_app.models import book as book_module, author
-from pprint import pprint
 
 @app.route("/authors")
 def authors():

@@ -1,5 +1,7 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import author
+from flask_app import flash
+import re, pprint
 
 DATABASE = 'books_schema'
 class Book:

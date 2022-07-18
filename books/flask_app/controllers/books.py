@@ -1,5 +1,4 @@
-from flask_app import app
-from flask import render_template, request, redirect, session
+from flask_app import app, render_template, request, redirect, session
 from flask_app.models import book, author as author_module
 
 @app.route("/")

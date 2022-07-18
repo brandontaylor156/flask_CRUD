@@ -1,7 +1,9 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import book
-from pprint import pprint
+from flask_app import flash
+import re, pprint
 
+EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
 DATABASE = 'books_schema'
 class Author:
     def __init__( self , data ):
